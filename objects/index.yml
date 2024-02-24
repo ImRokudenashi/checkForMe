@@ -1,0 +1,21 @@
+name: test workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: canary
+      - run: |
+          echo "hello world"
+          git clone {{base}}.git _src_
+          cd _src_
+          deno task start {{url}}
